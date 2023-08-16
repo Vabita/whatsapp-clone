@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="app">
+  <!-- ... (previous code) -->
+
+<div class="sidebar">
+    <div class="header">
+        <img src="profile.jpg" alt="Profile Picture">
+        <h1>{{ username }}</h1>
+    </div>
+    <ul class="contact-list">
+        {% for user in registered_users %}
+            <li class="contact">
+                <a href="/chat/{{ user }}">{{ user }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="nav-icons">
+        <span class="status-icon">&#9889;</span>
+        <span class="call-icon">&#9742;</span>
+        <a href="/logout"><span class="signout-icon">&#128682;</span></a>
+    </div>
+</div>
+
+<!-- ... (remaining code) -->
+
+
+<div class="chat">
+    <div class="chat-header">
+        <img src="contact1.jpg" alt="Contact 1">
+        <h2>{{ selected_user }}</h2>
+    </div>
+    <div class="chat-messages">
+        <ul>
+            {% for message in messages.get(selected_user, []) %}
+                <li><strong>{{ message.sender }}:</strong> {{ message.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="chat-input">
+        <form action="/send_message/{{ selected_user }}" method="post">
+            <input type="text" name="message" placeholder="Type a message" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+<!-- ... (remaining code) -->
+
+<!-- ... (remaining code) -->
+
+    </div>
+    <footer>
+        <div class="nav-icons">
+            <span class="status-icon">&#9889;</span>
+            <span class="call-icon">&#9742;</span>
+            <span class="signout-icon">&#128682;</span>
+        </div>
+    </footer>
+</body>
+</html>
